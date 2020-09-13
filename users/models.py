@@ -5,4 +5,4 @@ from django.urls import reverse
 
 class CustomUser(AbstractUser):
 
-    about = models.TextField(max_length=255)
+    about = models.TextField(max_length=255, )
