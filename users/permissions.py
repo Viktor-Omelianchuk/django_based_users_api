@@ -6,4 +6,3 @@ class IsOwnerOrAdmin(permissions.BasePermission):
         if request.method in permissions.SAFE_METHODS:
             return True
         return str(obj.username) == str(request.user) or request.user.is_superuser
-
