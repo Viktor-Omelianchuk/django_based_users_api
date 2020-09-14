@@ -1,36 +1,27 @@
 =======================
-Flask-based Weather app
+Django_based_users_api
 =======================
 
 
 .. image:: https://img.shields.io/badge/code%20style-black-000000.svg
      :target: https://github.com/ambv/black
      :alt: Black code style
-.. image:: https://travis-ci.org/Viktor-Omelianchuk/flask_based_weather_app.svg?branch=master&status=passed
-    :target: https://travis-ci.org/Viktor-Omelianchuk/flask_based_weather_app.svg?branch=master
-    :alt: Linux build status on Travis CI
 
 :License: MIT
 
 .. contents::
 
-Website
--------------------
-
-- http://flask-weather.eba-rqdaactq.us-west-2.elasticbeanstalk.com/
-
-
 Installation
 -------------------
 On Unix, Linux, BSD, macOS, and Cygwin::
 
-  $ git clone https://github.com/Viktor-Omelianchuk/flask_based_weather_app.git
+  $ git clone https://github.com/Viktor-Omelianchuk/django_based_users_api.git
 
 Create and activate isolated Python environments
 -------------------------------------------------
 ::
 
-    $ cd flask_based_weather_app
+    $ cd django_based_users_api
     $ virtualenv env
     $ source env/bin/activate
 
@@ -40,47 +31,100 @@ Install requirements
 
     $ make install
 
+Migrations
+--------------------------------------
+::
+
+    $ make makemigrations
+    $ make migrate
+
+
+Create superuser
+--------------------------------------
+::
+
+    $ make createsuperuser
+
+
 Run local development server
 --------------------------------------
 ::
 
     $ make run
 
-Generate and view Sphinx HTML documentation
----------------------------------------------------------
-::
-
-    $ make docs
 
 Run tests
--------------------
+---------------------------------------------------------
 ::
 
     $ make test
 
+Available endpoints
+--------------------
 
-Check code coverage quickly with the default Python
----------------------------------------------------------
+
+User registration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ::
 
-    $ make coverage
-
-Remove all build, test, coverage and Python artifacts
----------------------------------------------------------
+     Endpoint: /api/user/registration/
+     Method: POST
+ 
+Data of all users
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ::
 
-    $ make clean
+     Endpoint: /api/user/all_users/
+     Method: GET
 
-Build docker image
--------------------
+User data
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ::
 
-    $ docker build -t myimage .
-
-Docker run
--------------------
+     Endpoint: /api/user/{id}/
+     Method: GET, PUT, DELETE
+     GET - available to all authenticated users
+     PUT, DELETE - available to either owner or administrator
+     
+    
+GET Token
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ::
 
-    $ docker run --network host --name mycontainer -p 8000:8000 myimage
+     Endpoint: /api/token-auth/
+     Method: POST
+     username and password are required
+     
+GET Token with browser UI
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+::
 
+     Endpoint: /api/auth_token/token/login
+     Method: POST
+     username and password are required
+
+Change password
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+::
+
+     Endpoint: /api/change-password/
+     Method: PUT
+     Password change requires authentication and old password
+     
+Reset password
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+::
+
+     Endpoint: /api/password_reset/
+     Method: POST
+     After specifying "email" a one-time token for password reset will be sent to email
+     (temporarily the token is output to the console)
+     
+Password reset confirmation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+::
+
+     Endpoint: /api/password_reset/confirm/
+     Method: POST
+     Need a one-time token from the email and a new password
 

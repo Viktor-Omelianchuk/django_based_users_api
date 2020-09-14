@@ -49,7 +49,7 @@ class UsersViewSetTestCase(APITestCase):
     def test_users_list_un_autenticated(self):
         self.client.force_authenticate(user=None)
         response = self.client.get("/api/user/all_users/")
-        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_user_detail_retrieve(self):
         response = self.client.get("/api/user/1/")

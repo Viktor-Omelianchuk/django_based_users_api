@@ -31,7 +31,7 @@ test: ## run tests quickly with the default Python
 
 install: clean ## install the package to the active Python's site-packages
 	python -m pip install --upgrade pip
-	python -m pip install -r requirements_dev.txt
+	python -m pip install -r requirements.txt
 
 run: ## run local development server
 	python manage.py runserver
@@ -39,8 +39,8 @@ run: ## run local development server
 createsuperuser: ## create super user
 	python manage.py createsuperuser
 
-makemigration: ## creating new migrations based on changes
+makemigrations: ## creating new migrations based on changes
 	python manage.py makemigrations
 
 migrate: ## responsible for changing migrations
-	python manage.py makemigrations
+	python manage.py migrate
